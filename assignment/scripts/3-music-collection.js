@@ -30,7 +30,7 @@ addToCollection(
 addToCollection(myCollection, 'SO WHAT', 'While She Sleeps', 2019);
 addToCollection(myCollection, 'Things Change', 'Grabbitz', 2017);
 addToCollection(myCollection, 'Paradise Lost', 'Delta Heavy', 2016);
-addToCollection(myCollection, 'Kingdom of Giants', 'Passenger', 2020);
+addToCollection(myCollection, 'Passenger', 'Kingdom of Giants', 2020);
 
 // Create a function named showCollection.
 function showCollection(collection) {
@@ -60,12 +60,57 @@ function findByArtist(collection, artist) {
 }
 
 // Test the findByArtist function. Make sure to test with an artist you know is in the collection, as well as an artist you know is not in your collection
-console.log(findByArtist(myCollection, 'Grafix'));
-console.log(findByArtist(myCollection, 'Grabbitz'));
-console.log(findByArtist(myCollection, 'Michael Jackson'));
+console.log('Find Grafix', findByArtist(myCollection, 'Grafix'));
+console.log('Find Grabbitz', findByArtist(myCollection, 'Grabbitz'));
+console.log(
+  "Don't find the King of Pop",
+  findByArtist(myCollection, 'Michael Jackson')
+);
 
 // Create a function called search that will allow for searching by artist and yearPublished
 
+// Take in a collection parameter and a searchCriteria
+function search(collection, searchCriteria) {
+  // If there is no search object, an empty search object
+  // or missing artist/yearPublished data provided as input,
+  // return all albums from the collection being searched.
+
+  if (
+    !searchCriteria ||
+    !searchCriteria.artist ||
+    !searchCriteria.yearPublished
+  ) {
+    return collection;
+  }
+
+  let searchMatch = [];
+
+  for (item of collection) {
+    if (
+      searchCriteria.artist === item.artist &&
+      searchCriteria.yearPublished === item.yearPublished
+    ) {
+      // Return a new array of all items in the collection matching all of the search criteria.
+      searchMatch.push(item);
+      console.log('Found:', searchMatch);
+    }
+    // If no results are found, return an empty array.
+  }
+  return searchMatch;
+}
+
+console.log(
+  "Don't find ",
+  search(myCollection, {
+    artist: 'Ray Charles',
+    yearPublished: 1957,
+  })
+);
+
+search(myCollection);
+console.log('Find this', search(myCollection, 'Kingdom of Giants'));
+search(myCollection, 'Grabbitz');
+search(myCollection, 'Grafix');
 
 // Add an array of tracks to each of your album objects.
 
