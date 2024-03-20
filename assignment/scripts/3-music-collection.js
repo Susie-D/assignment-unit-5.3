@@ -21,6 +21,8 @@ function addToCollection(
   // Add the new object to the end of the collection array.
   collection.push(album);
   // return the newly created object.
+
+  console.log(myCollection);
   // return album
   return album;
 }
@@ -160,12 +162,12 @@ function search(collection, searchCriteria, trackName) {
   // IF the search object has a trackName property, only search for that, ignoring any artist or yearPublished properties.
 
   // OPTIONAL TRACK
-  // if (trackName) {
-  //   collection.filter((trackItem) => trackItem);
-  //   console.log(trackItem);
-  // }
-
-  if (
+  if (!{ searchCriteria } || trackName) {
+    let filteredTrack = collection.filter((s) => {
+      s.albumTracks.filter((t) => t.name === trackName);
+    });
+    return filteredTrack;
+  } else if (
     !searchCriteria ||
     !searchCriteria.artist ||
     !searchCriteria.yearPublished
@@ -190,28 +192,31 @@ function search(collection, searchCriteria, trackName) {
   // return searchMatch;
 
   // --- USING FILTERING --- //
-
-  let filteredSearch = collection.filter(
-    (item) =>
-      item.artist === searchCriteria.artist &&
-      item.yearPublished === searchCriteria.yearPublished
-  );
+  else
+    filteredSearch = collection.filter(
+      (item) =>
+        item.artist === searchCriteria.artist &&
+        item.yearPublished === searchCriteria.yearPublished
+    );
   return filteredSearch;
 }
 
-console.log(
-  "Don't find ",
-  search(myCollection, {
-    artist: 'Ray Charles',
-    yearPublished: 1957,
-  })
-);
+// console.log(
+//   "Don't find ",
+//   search(myCollection, {
+//     artist: 'Ray Charles',
+//     yearPublished: 1957,
+//   })
+// );
 
-search(myCollection);
-console.log('Find this', search(myCollection, 'Kingdom of Giants'));
-search(myCollection, 'Grabbitz');
-search(myCollection, 'Grafix');
-console.log(search(myCollection, '', 2022));
+// function search(collection, searchCriteria, trackName)
+// search(myCollection);
+// console.log('Find this', search(myCollection, 'Kingdom of Giants'));
+// search(myCollection, 'Grabbitz');
+// search(myCollection, 'Grafix');
+// console.log(search(myCollection, '', 2022));
+
+console.log(search(myCollection, '', 'Feel Alive'));
 
 // ------ EXTRA STRETCHY STRETCH GOALS ------ //
 
@@ -233,6 +238,15 @@ console.log(search(myCollection, '', 2022));
 
 // Update search to allow an optional trackName search criteria.
 // IF the search object has a trackName property, only search for that, ignoring any artist or yearPublished properties❓
+
+// ------ NOTES: FILTERING ------ //
+// let posts = [
+//   { title: 'post1', author: 'dan' },
+//   { title: 'post2', author: 'lisa' },
+//   { title: 'post3', author: 'dan' },
+// ];
+
+// console.log(posts.filter((post) => post.title === 'post1'));
 
 // ------ SLACK DISCUSSION ------ //
 
